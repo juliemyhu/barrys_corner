@@ -13,12 +13,16 @@ def main():
     pygame.display.set_icon(logo)
     pygame.display.set_caption("Barry's Corner")
     bg = pygame.image.load('wood.png')
-    ball = pygame.image.load('mouse.png')
+    mouse = pygame.image.load('mouse.png')
+    ball = pygame.image.load('ball.png')
+    feather = pygame.image.load('feather.png')
 
     # create a surface on screen that has the size of 240 x 180
-    screen = pygame.display.set_mode((500, 500))
+    screen = pygame.display.set_mode((1000, 1000))
 
-    screen.blit(ball, (50, 50))
+    screen.blit(mouse, (50, 50))
+    screen.blit(ball, (10, 50))
+    screen.blit(feather, (20, 50))
 
     pygame.display.flip()
     # define a variable to control the main loop
