@@ -14,14 +14,20 @@ def main():
     pygame.display.set_caption("Barry's Corner")
     bg = pygame.image.load('wood.png')
     mouse = pygame.image.load('mouse.png')
-    ball = pygame.image.load('ball.png')
+    orange_ball = pygame.image.load('orange_ball.png')
+    orange_ball = pygame.transform.scale(orange_ball, (300, 300))
+    green_ball = pygame.image.load('green_ball.png')
+    pink_ball = pygame.image.load('pink_ball.png')
+
     feather = pygame.image.load('feather.png')
 
     # create a surface on screen that has the size of 240 x 180
-    screen = pygame.display.set_mode((1000, 1000))
+    screen = pygame.display.set_mode((3000, 3000))
 
     screen.blit(mouse, (50, 50))
-    screen.blit(ball, (10, 50))
+    screen.blit(orange_ball, (10, 50))
+    # screen.blit(green_ball, (10, 50))
+    # screen.blit(pink_ball, (10, 50))
     screen.blit(feather, (20, 50))
 
     pygame.display.flip()
