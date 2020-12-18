@@ -44,7 +44,7 @@ def main():
     orange_ball = pygame.transform.scale(orange_ball, (300, 300))
     toyX = 1000
     toyY = 650
-    toy_change = 0
+    toyX_change = 0
 
     pygame.display.flip()
 
@@ -74,14 +74,14 @@ def main():
                 running = False
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_LEFT:
-                    toy_change = -10
+                    toy_Xchange = -10
                 if event.key == pygame.K_RIGHT:
-                    toy_change = 10
+                    toy_Xchange = 10
             if event.type == pygame.KEYUP:
                 if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT:
-                    toy_change = 0
+                    toy_Xchange = 0
 
-        toyX += toy_change
+        toyX += toyX_change
         toy(toyX, toyY)
         pygame.display.update()
 
