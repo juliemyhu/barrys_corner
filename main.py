@@ -45,6 +45,7 @@ def main():
     toyX = 1000
     toyY = 650
     toyX_change = 0
+    toyY_change = 0
 
     pygame.display.flip()
 
@@ -74,14 +75,26 @@ def main():
                 running = False
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_LEFT:
-                    toy_Xchange = -10
+                    toyX_change = -50
                 if event.key == pygame.K_RIGHT:
-                    toy_Xchange = 10
+                    toyX_change = 50
+                if event.key == pygame.K_UP:
+                    toyY_change = -50
+                if event.key == pygame.K_DOWN:
+                    toyY_change = 50
             if event.type == pygame.KEYUP:
                 if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT:
-                    toy_Xchange = 0
+                    toyX_change = 0
+                if event.key == pygame.K_UP or event.key == pygame.K_DOWN:
+                    toyY_change = 0
 
         toyX += toyX_change
+        toyY += toyY_change
+
+        if toyX <= -40:
+            toyX = -40
+        elif toyX >= 2200:
+            toyX = 2200
         toy(toyX, toyY)
         pygame.display.update()
 
