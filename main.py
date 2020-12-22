@@ -1,5 +1,6 @@
 """ pygame """
 import pygame
+from random import randint
 """ main loop for Barrys Corner"""
 
 # toy
@@ -20,26 +21,8 @@ def main():
 
     bg = pygame.image.load('wood.png')
 
-    # images
-    # mouse = pygame.image.load('mouse.png')
-    # mouse = pygame.transform.scale(mouse, (200, 200))
-
-    # green_ball = pygame.image.load('green_ball.png')
-    # green_ball = pygame.transform.scale(green_ball, (300, 300))
-    # pink_ball = pygame.image.load('pink_ball.png')
-    # pink_ball = pygame.transform.scale(pink_ball, (300, 300))
-    # feather = pygame.image.load('feather.png')
-    # feather = pygame.transform.scale(feather, (300, 300))
-
     # create a surface on screen that has the size of 240 x 180
     screen = pygame.display.set_mode((2500, 1300))
-
-    # screen.blit(green_ball, (10, 50))
-    # screen.blit(pink_ball, (10, 50))
-    # screen.blit(feather, (20, 50))
-    # pygame.display.set_caption("Barry's Corner")
-
-    # define a variable to control the main loop
 
     #Toy
     orange_ball = pygame.image.load('orange_ball.png')
@@ -52,7 +35,6 @@ def main():
     pygame.display.flip()
 
     def toy(x, y):
-        # screen.blit(mouse, (50, 50))
         screen.blit(orange_ball, (x, y))
 
     running = True
@@ -61,15 +43,6 @@ def main():
     while running:
 
         screen.blit(bg, (0, 0))
-
-        # event handling, gets all event from the event queue
-        # for x in range(100):  #animate 100 frames
-        #     screen.blit(orange_ball, (400, 500))  #erase
-        #     position = position.move(2, 0)  #move player
-        #     screen.blit(orange_ball, (200, 400))  #draw new player
-        #     pygame.display.update()  #and show it all
-        #     pygame.time.delay(100)
-        # toyX += 0.1
 
         for event in pygame.event.get():
             # only do something if the event is of type QUIT
@@ -105,6 +78,7 @@ def main():
             toyY = -20
         elif toyY >= 1070:
             toyY = 1070
+
         toy(toyX, toyY)
         pygame.display.update()
 
@@ -124,37 +98,42 @@ def main_menu():
 
     screen = pygame.display.set_mode((2500, 1300))
     myfont = pygame.font.SysFont('Comic Sans MS', 30)
-    textsurface = myfont.render('Start Game', False, (0, 0, 0))
+    start_game = myfont.render('Start Game', False, (0, 0, 0))
+    random_mode = myfont.render('Random Mode', False, (0, 0, 0))
 
     while True:
         screen.blit(bg, (0, 0))
 
         bg = pygame.image.load('wood.png')
+        bear = pygame.image.load('bear.png')
 
         mx, my = pygame.mouse.get_pos()
 
-        button_1 = pygame.Rect(1500, 500, 300, 100)
-        button_2 = pygame.Rect(1500, 800, 300, 100)
+        button_1 = pygame.Rect(1500, 400, 280, 90)
+        button_2 = pygame.Rect(1500, 600, 280, 90)
 
         if button_1.collidepoint((mx, my)):
             if click:
                 main()
         if button_2.collidepoint((mx, my)):
             if click:
-                main()
+                random_game()
         pygame.draw.rect(screen, (
             255,
             255,
             255,
         ), button_1)
         pygame.draw.rect(screen, (
-            0,
+            255,
             255,
             255,
         ), button_2)
 
-        screen.blit(textsurface, (1500, 500))
+        screen.blit(start_game, (1560, 420))
+        screen.blit(random_mode, (1540, 620))
         screen.blit(barry_logo, (300, 350))
+        screen.blit(bear, (2100, 1000))
+
         click = False
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -170,18 +149,57 @@ def main_menu():
 
 # run the main function only if this module is executed as the main script
 # (if you import this as a module then nothing is executed)
-def game():
+
+
+def random_game():
+
     pygame.init()
+
+    # load and set the logo
+    logo = pygame.image.load("pawprint.png")
+    pygame.display.set_icon(logo)
+    pygame.display.set_caption("Barry's Corner")
+
+    bg = pygame.image.load('wood.png')
+
+    # images
+    mouse = pygame.image.load('mouse.png')
+    mouse = pygame.transform.scale(mouse, (200, 200))
+    green_ball = pygame.image.load('green_ball.png')
+    green_ball = pygame.transform.scale(green_ball, (300, 300))
+    pink_ball = pygame.image.load('pink_ball.png')
+    pink_ball = pygame.transform.scale(pink_ball, (300, 300))
+    feather = pygame.image.load('feather.png')
+    feather = pygame.transform.scale(feather, (300, 300))
+
+    screen = pygame.display.set_mode((2500, 1300))
+
+    pygame.display.set_caption("Barry's Corner")
+
+    screen.blit(bg, (0, 0))
+    screen.blit(green_ball, (10, 50))
+    screen.blit(pink_ball, (10, 50))
+    screen.blit(feather, (20, 50))
+
+    pygame.display.flip()
+
+    def toy(toy_image, x, y):
+        screen.blit(toy_image, (x, y))
+
     running = True
     while running:
 
         for event in pygame.event.get():
-            if event.type == QUIT:
-                pygame.quit()
-            if event.type == KEYDOWN:
-                if event.key == K_ESCAPE:
-                    running = False
-        pygame.display.update()
+            if event.type == pygame.QUIT:
+                running = False
+        x = randint(0, 2300)
+        y = randint(0, 1300)
+
+        toy(mouse, x, y)
+        # toy(green_ball,randomx,0)
+        # toy(feather,0,0)
+
+    pygame.display.update()
 
 
 if __name__ == "__main__":
