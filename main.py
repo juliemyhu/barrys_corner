@@ -1,6 +1,8 @@
 """ pygame """
 import pygame
 from random import randint
+from pygame.time import Clock
+import pygame.math as math
 """ main loop for Barrys Corner"""
 
 # toy
@@ -162,6 +164,13 @@ def random_game():
 
     bg = pygame.image.load('wood.png')
 
+    badguys = []
+    clock = Clock()
+    CLOCK = 11
+    TOY = 10
+    pygame.time.set_timer(TOY, 800)
+    pygame.time.set_timer(CLOCK, 1000)
+
     # images
     mouse = pygame.image.load('mouse.png')
     mouse = pygame.transform.scale(mouse, (200, 200))
@@ -192,10 +201,26 @@ def random_game():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
+            if event.type == TOY:
+                posn = math.Vector2(r.randint(50, 800), r.randint(50, 600))
+
+                # Create a random speed vector.
+                speed = r.randint(1, 10)
+                dx = r.random() * speed * r.choice((-1, 1))
+                dy = r.random() * speed * r.choice((-1, 1))
+                vector = math.Vector2(dx, dy)
+
         x = randint(0, 2300)
         y = randint(0, 1300)
+        for bg in badguys:
+            bg[0] += bg[1]
 
-        toy(mouse, x, y)
+        for bg in badguys:
+            screen.blit(toy, bg[0])
+
+        clock.tick(60)
+
+        # toy(mouse, x, y)
         # toy(green_ball,randomx,0)
         # toy(feather,0,0)
 
