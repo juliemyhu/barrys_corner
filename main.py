@@ -1,6 +1,6 @@
 """ pygame """
 import pygame
-from random import randint
+from random import randint, randrange
 from pygame.time import Clock
 import pygame.math as math
 """ main loop for Barrys Corner"""
@@ -153,6 +153,18 @@ def main_menu():
 # (if you import this as a module then nothing is executed)
 
 
+class toy:
+    def __init__(self, image):
+        self.x = randint(0, 2300)
+        self.y = randint(0, 1300)
+        self.image = pygame.image.load(image)
+        self.image = pygame.transform.scale(self.image, (300, 300))
+
+
+green_ball = toy('green_ball.png')
+feather = toy('feather.png')
+
+
 def random_game():
 
     pygame.init()
@@ -164,67 +176,55 @@ def random_game():
 
     bg = pygame.image.load('wood.png')
 
-    badguys = []
-    clock = Clock()
-    CLOCK = 11
-    TOY = 10
-    pygame.time.set_timer(TOY, 800)
-    pygame.time.set_timer(CLOCK, 1000)
-
     # images
-    mouse = pygame.image.load('mouse.png')
-    mouse = pygame.transform.scale(mouse, (200, 200))
-    green_ball = pygame.image.load('green_ball.png')
-    green_ball = pygame.transform.scale(green_ball, (300, 300))
-    pink_ball = pygame.image.load('pink_ball.png')
-    pink_ball = pygame.transform.scale(pink_ball, (300, 300))
-    feather = pygame.image.load('feather.png')
-    feather = pygame.transform.scale(feather, (300, 300))
+    # mouse = pygame.image.load('mouse.png')
+    # mouse = pygame.transform.scale(mouse, (200, 200))
+    # green_ball = pygame.image.load('green_ball.png')
+    # green_ball = pygame.transform.scale(green_ball, (300, 300))
+    # pink_ball = pygame.image.load('pink_ball.png')
+    # pink_ball = pygame.transform.scale(pink_ball, (300, 300))
+    # feather = pygame.image.load('feather.png')
+    # feather = pygame.transform.scale(feather, (300, 300))
 
     screen = pygame.display.set_mode((2500, 1300))
 
     pygame.display.set_caption("Barry's Corner")
 
     screen.blit(bg, (0, 0))
-    screen.blit(green_ball, (10, 50))
-    screen.blit(pink_ball, (10, 50))
-    screen.blit(feather, (20, 50))
+    screen.blit(green_ball.image, (100, 50))
+    # screen.blit(pink_ball, (400, 50))
+    # screen.blit(feather, (800, 50))
 
     pygame.display.flip()
 
-    def toy(toy_image, x, y):
-        screen.blit(toy_image, (x, y))
+    def toy(toy_obj):
+        screen.blit(bg, (0, 0))
+        x_offset = randint(0, 2000)
+        y_offset = randint(0, 1000)
+        # x_offset = randrange(-50, 50, 25) + 15
+        # y_offset = randrange(-50, 50, 25) + 15
+        toy_obj.x += x_offset
+        toy_obj.y += y_offset
+        screen.blit(toy_obj.image, (toy_obj.x, toy_obj.y))
 
     running = True
     while running:
+        screen.blit(bg, (0, 0))
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
-            if event.type == TOY:
-                posn = math.Vector2(r.randint(50, 800), r.randint(50, 600))
-
-                # Create a random speed vector.
-                speed = r.randint(1, 10)
-                dx = r.random() * speed * r.choice((-1, 1))
-                dy = r.random() * speed * r.choice((-1, 1))
-                vector = math.Vector2(dx, dy)
-
-        x = randint(0, 2300)
-        y = randint(0, 1300)
-        for bg in badguys:
-            bg[0] += bg[1]
-
-        for bg in badguys:
-            screen.blit(toy, bg[0])
-
-        clock.tick(60)
 
         # toy(mouse, x, y)
         # toy(green_ball,randomx,0)
         # toy(feather,0,0)
 
-    pygame.display.update()
+        toy(green_ball)
+        toy(feather)
+
+        # pygame.time.wait(500)
+        # toy(feather, x, y)
+        pygame.display.update()
 
 
 if __name__ == "__main__":
