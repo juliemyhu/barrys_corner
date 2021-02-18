@@ -227,6 +227,7 @@ def random_game():
         for i in range(10):
             number = randrange(2000)
             numberY = randrange(1200)
+
         toyX = number
         toyY = numberY
 

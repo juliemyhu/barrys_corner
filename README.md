@@ -15,3 +15,16 @@ Use the arrowkeys to move a toy around in Normal mode.
 
 Are you feeling lazy?
 Play random mode to have the toys move randomly on the screen by itself.
+
+![](./randommode.gif?raw=true)
+
+### Try it out yourself!
+
+1. Download this repository
+
+2. cd into the directory
+
+3. run main file
+   ```bash
+   python3 main.py
+   ```
