@@ -28,3 +28,7 @@ Play random mode to have the toys move randomly on the screen by itself.
    ```bash
    python3 main.py
    ```
+
+#### Future Features
+
+- more toys
